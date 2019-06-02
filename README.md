@@ -62,6 +62,11 @@ https://www.wikihow.com/Move-from-Windows-to-Linux
 
 ```
 
+## Initializing database
+*Only the first time before initializing the server*
+```
+flask init-db
+```
 
 ## Running
 
