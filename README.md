@@ -26,9 +26,8 @@ source activate
 git clone https://github.com/brenopoggiali/pick-up-games
 cd pick-up-games
 
-# Setting variables up
-export FLASK_APP=backend
-export FLASK_ENV=development
+# Install requirements
+pip install -r requirements.txt
 ```
 
 If you're on a Mac
@@ -47,9 +46,8 @@ source activate
 git clone https://github.com/brenopoggiali/pick-up-games
 cd pick-up-games
 
-# Setting variables up
-export FLASK_APP=backend
-export FLASK_ENV=development
+# Install requirements
+pip install -r requirements.txt
 ```
 
 If you're on Windows
@@ -71,5 +69,5 @@ flask init-db
 ## Running
 
 ```
-flask run
+flask run < ./backend/.env
 ```
