@@ -336,22 +336,22 @@ INSERT INTO Vaquinha_Coletiva(id_vaquinha_coletiva, valor_total) VALUES (4, 300)
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 4, 20, '2018-11-28 02:29:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 8, 20, '2019-08-07 10:05:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 10, 20, '2020-04-15 18:53:00');
-INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 11, 20, '2019-09-30 20:37:00');
+INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 11, 0, '2019-09-30 20:37:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 12, 20, '2019-10-02 03:34:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 15, 20, '2019-01-10 16:24:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 16, 20, '2018-10-16 18:25:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 17, 20, '2018-09-09 17:47:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 19, 20, '2019-01-29 18:25:00');
-INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 21, 20, '2020-05-22 11:38:00');
+INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 21, 0, '2020-05-22 11:38:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 26, 20, '2020-04-16 08:12:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (2, 27, 20, '2019-01-10 16:24:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 13, 10, '2019-06-03 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 14, 10, '2019-06-04 00:00:00');
-INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 26, 10, '2019-06-05 00:00:00');
+INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 26, 0, '2019-06-05 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 29, 10, '2019-06-06 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 34, 10, '2019-06-07 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 33, 10, '2019-06-08 00:00:00');
-INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 36, 10, '2019-06-09 00:00:00');
+INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 36, 0, '2019-06-09 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 38, 10, '2019-06-10 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 39, 10, '2019-06-11 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (3, 40, 10, '2019-06-12 00:00:00');
@@ -360,11 +360,10 @@ INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (4, 8, 30, '2019-03-05 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (4, 9, 30, '2019-03-05 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (4, 11, 30, '2019-03-05 00:00:00');
-INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (4, 15, 30, '2019-03-05 00:00:00');
+INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (4, 15, 0, '2019-03-05 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (4, 17, 30, '2019-03-06 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (4, 21, 30, '2019-03-06 00:00:00');
 INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (4, 22, 30, '2019-03-06 00:00:00');
-INSERT INTO Vaquinha_Coletiva_Pessoa(id_vaquinha_coletiva, id_pessoa, valor_pago, data) VALUES (4, 25, 30, '2019-03-06 00:00:00');
 
 INSERT INTO Vaquinha_Individual(id_vaquinha_individual, pergunta_personalizada, valor) VALUES (1, 'Nome na camisa', 25);
 
