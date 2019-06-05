@@ -1,7 +1,8 @@
 CREATE TABLE Pessoa (
 	id_pessoa INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	email VARCHAR(255) NOT NULL,
-    nome_pessoa VARCHAR(255) NOT NULL
+    nome_pessoa VARCHAR(255) NOT NULL,
+    foto VARCHAR(255)
 );
 
 CREATE TABLE Pelada (
@@ -23,8 +24,7 @@ CREATE TABLE Jogador(
 	Pontos NUMERIC(5,2) NOT NULL,
 	Partida       INTEGER,
    	/*mando removido */
-   	Titular       BIT,
-   	Substituido   BIT  NOT NULL,
+   	/*Titular e substituido removido*/
    	/*TempoJogado removido */
 	Nota          NUMERIC(3,1),
 	FS            INTEGER,
@@ -55,6 +55,9 @@ CREATE TABLE Grupo_de_Pelada(
 	id_grupo_de_pelada INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	nome VARCHAR(255) NOT NULL,
 	descricao VARCHAR(255),
+	/*Adicionando sigla e escudo*/
+	sigla VARCHAR(3),
+	escudo VARCHAR(255)
 	id_adm INTEGER(11) NOT NULL,
 	FOREIGN KEY (id_adm) REFERENCES Pessoa
 
