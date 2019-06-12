@@ -12,7 +12,7 @@ CREATE TABLE Pelada (
 	inicio TIMESTAMP,
 	fim TIMESTAMP,
 	id_grupo_de_pelada INTEGER NOT NULL, /*GRUPO DA PELADA E REFERÊNCIAS ADICIONADAS*/
-	FOREIGN KEY (id_grupo_de_pelada) REFERENCES Grupo_de_Pelada 
+	FOREIGN KEY (id_grupo_de_pelada) REFERENCES Grupo_de_Pelada
 );
 
 CREATE TABLE Jogador(
@@ -57,7 +57,7 @@ CREATE TABLE Grupo_de_Pelada(
 	descricao VARCHAR(255),
 	/*Adicionando sigla e escudo*/
 	sigla VARCHAR(3),
-	escudo VARCHAR(255)
+	escudo VARCHAR(255),
 	id_adm INTEGER(11) NOT NULL,
 	FOREIGN KEY (id_adm) REFERENCES Pessoa
 
@@ -69,14 +69,14 @@ CREATE TABLE Participa_grupo_pelada( /*TABELA CRIADA*/
 	CONSTRAINT PK_pessoa_grupo_pelada PRIMARY KEY (id_pessoa, id_grupo_de_pelada),
 	FOREIGN KEY (id_pessoa) REFERENCES Pessoa,
 	FOREIGN KEY (id_grupo_de_pelada) REFERENCES Grupo_de_Pelada
-	
+
 );
 
 CREATE TABLE Vaquinha(
 	id_vaquinha INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	motivo VARCHAR(255),
 	id_grupo_de_pelada INTEGER(11) NOT NULL,
-	prazo TIMESTAMP, 
+	prazo TIMESTAMP,
 	FOREIGN KEY (id_grupo_de_pelada) REFERENCES Grupo_de_Pelada
 );
 
@@ -112,4 +112,11 @@ CREATE TABLE Vaquinha_Individual_Pessoa(
 	FOREIGN KEY (id_pessoa) REFERENCES Pessoa
 );
 
-
+/* NOVA RESTRIÇÃO - não funcionou, não sei porque
+CREATE ASSERTION Se-participa-pelada-participa-do-grupo
+	CHECK (not exists (select *
+						from Jogador NATURAL JOIN Pelada
+						where not exists (select *
+											from Participa_grupo_pelada
+											where Participa_grupo_pelada.id_pessoa = Jogador.id_pessoa AND
+													Participa_grupo_pelada.id_grupo_de_pelada = Pelada.id_grupo_de_pelada)));*/
