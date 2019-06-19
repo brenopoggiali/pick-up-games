@@ -1,4 +1,5 @@
-INSERT INTO Participa_grupo_pelada ("38505", "id_grupo_de_pelada") VALUES 
+INSERT INTO Participa_grupo_pelada ("id_pessoa", "id_grupo_de_pelada") VALUES 
+('43618', '200'),
 ('43618', '203'),
 ('86615', '205'),
 ('91263', '206'),
