@@ -64,15 +64,16 @@ with open('../data/dados_agregados_limpos.csv','r') as csvinput:
             else:
                 toAppend = 224
 
-            if(row[30] == 2015):
-                toAppend += 3
-            elif(row[30] == 2016):
-                toAppend +=5
-            elif(row[30] == 2017):
-                toAppend +=7
+            if(row[30] == "2015"):
+                toAppend += 2
+            elif(row[30] == "2016"):
+                toAppend +=4
+            elif(row[30] == "2017"):
+                toAppend +=6
 
-            if(int(row[27])>19):
-                toAppend +=1
+            
+            toAppend = toAppend * 19
+            toAppend += int(row[27])
 
             row.append(toAppend)
             all.append(row)

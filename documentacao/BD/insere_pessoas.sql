@@ -960,7 +960,6 @@ INSERT INTO Pessoa ("id_pessoa", "nome_pessoa", "foto", "email") VALUES
 ('93678', 'Sananduva', '', 'sananduva@pelada.com'),
 ('103099', 'Éderson', '', 'éderson@pelada.com'),
 ('103088', 'Lucas Ribeiro', '', 'lucasribeiro@pelada.com'),
-('ID', 'Apelido', '', 'apelido@pelada.com'),
 ('86189', 'Mosquito', '', 'mosquito@pelada.com'),
 ('68974', 'Marcão', '', 'marcão@pelada.com'),
 ('63005', 'Welinton', '', 'welinton@pelada.com'),
