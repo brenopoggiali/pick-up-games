@@ -11,6 +11,9 @@ import { UpgradeComponent }   from './upgrade/upgrade.component';
 import { CardItemComponent }   from './card-item/card-item.component';
 import { NewDashboardComponent }   from './new-dashboard/new-dashboard.component';
 import { PickupStatsComponent } from './pickup-stats/pickup-stats.component';
+import { ChipInComponent } from './chip-in/chip-in.component';
+import { GroupComponent } from './group/group.component';
+import { PickupGroupsComponent } from './pickup-groups/pickup-groups.component';
 
 export const AppRoutes: Routes = [
     {
@@ -62,5 +65,17 @@ export const AppRoutes: Routes = [
     {
         path: 'resumo/:pickup_id',
         component: PickupStatsComponent
+    },
+    {
+        path: 'vaquinhas',
+        component: ChipInComponent
+    },
+    {
+        path: 'grupos',
+        component: PickupGroupsComponent
+    },
+    {
+        path: 'grupo/:group_id',
+        component: GroupComponent
     }
 ]

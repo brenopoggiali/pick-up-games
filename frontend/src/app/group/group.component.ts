@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
-@Component({
-  selector: 'app-new-dashboard',
-  templateUrl: './new-dashboard.component.html',
-  styleUrls: ['./new-dashboard.component.scss']
-})
-export class NewDashboardComponent implements OnInit {
+import { ActivatedRoute } from '@angular/router';
 
-  private param: string;
+@Component({
+  selector: 'app-group',
+  templateUrl: './group.component.html',
+  styleUrls: ['./group.component.scss']
+})
+export class GroupComponent implements OnInit {
+
+  private group_id: string;
   private rows: any[];
   constructor(private router : ActivatedRoute) {
-    this.param = '';
+    this.group_id = this.router.snapshot.paramMap.get("group_id");
+    console.log(this.group_id);
     this.rows = [
       {
         name: "Pelada dos cria",
@@ -28,9 +30,6 @@ export class NewDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.param = this.router.snapshot.paramMap.get("param");
-    console.log(this.param);
-    this.rows[0].name = this.param;
   }
 
 }
