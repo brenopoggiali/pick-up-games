@@ -1,8 +1,8 @@
 CREATE TABLE Pessoa (
 	id_pessoa INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	email VARCHAR(255) NOT NULL,
-    nome_pessoa VARCHAR(255) NOT NULL,
-    foto VARCHAR(255)
+  nome_pessoa VARCHAR(255) NOT NULL,
+  foto VARCHAR(255)
 );
 
 CREATE TABLE Pelada (
@@ -9258,6 +9258,7 @@ INSERT INTO Pelada ("lugar", "preco", "inicio", "fim", "id_grupo_de_pelada") VAL
 ('Campo do Santa Cruz - PE', '4.5', '1561087206.683267', '1561090806.683274', '344'),
 ('Campo do Santa Cruz - PE', '4.5', '1561087206.683267', '1561090806.683274', '344'),
 ('Campo do Santa Cruz - PE', '4.5', '1561087206.683267', '1561090806.683274', '344');
+
 INSERT INTO Pelada ("lugar", "preco", "inicio", "fim", "id_grupo_de_pelada") VALUES 
 ('Campo do Santa Cruz - PE', '4.5', '1561087206.683267', '1561090806.683274', '344'),
 ('Campo do Santa Cruz - PE', '4.5', '1561087206.683267', '1561090806.683274', '344'),
