@@ -1,0 +1,36 @@
+<div class="col-lg-3 col-sm-6">
+    <div class="card">
+      <div class="content">
+        <div class="row">
+              <div style="margin-right: 10px;" class="col-sm-5">
+                        <div class="icon-big icon-warning text-center">
+                            <i class="ti-calendar"></i>
+                        </div> 
+                    <br/>
+                      <h3 style="margin-top:-25px;">
+                          <!-- 19/19 -->
+                        {{row.date}}
+                      </h3>
+              </div>
+              <div class="col-sm-5">
+                  
+                  <div class="icon-big icon-warning text-center">
+                      <i class="ti-alarm-clock"></i>
+                  </div>  
+                    <br/>
+                    <h3 style="margin-top:-25px;">
+                        <!-- 20:30 -->
+                        {{row.time}}
+                      </h3>
+              </div>
+        </div>
+        <div class="row">
+          <div class="footer">
+              <hr />
+              <div style= "padding-left: 15px;" class="stats">
+                  <i class="ti-location-pin"></i> {{row.place}}
+              </div>
+          </div>
+        </div>
+    </div>
+</div>

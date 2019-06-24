@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <div class="col-md-6 text-center">
+      <h3>Minhas vaquinhas</h3>
+      <div class="row justify-content-center" *ngFor="let row of chipinAdm">
+        <app-card-item [row]="row"></app-card-item>
+      </div>
+  </div>
+  <div class="col-md-6 border text-center">
+    <h3>Vaquinhas dos meus grupos</h3>
+    <div class="row" *ngFor="let row of chipin">
+      <app-card-item [row]="row"></app-card-item>
+    </div>
+  </div>
+</div>
