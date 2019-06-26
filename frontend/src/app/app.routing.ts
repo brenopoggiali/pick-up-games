@@ -14,7 +14,8 @@ import { PickupStatsComponent } from './pickup-stats/pickup-stats.component';
 import { ChipInComponent } from './chip-in/chip-in.component';
 import { GroupComponent } from './group/group.component';
 import { PickupGroupsComponent } from './pickup-groups/pickup-groups.component';
-import { SmallCardItemComponent } from './small-card-item/small-card-item.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 export const AppRoutes: Routes = [
     {
@@ -80,7 +81,11 @@ export const AppRoutes: Routes = [
         component: GroupComponent
     },
     {
-        path: 'smallcard',
-        component: SmallCardItemComponent
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     }
 ]
