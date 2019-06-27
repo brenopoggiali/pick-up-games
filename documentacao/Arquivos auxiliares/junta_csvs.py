@@ -13,11 +13,11 @@ new_f.to_csv("../data/grupo_pelada_temp.csv", index=False) #Output file
 
 # current date and time
 now = datetime.now()
-timestamp1 = datetime.timestamp(now)
-timestamp2 = datetime.timestamp(datetime.now() + timedelta(seconds=3600))
+timestamp1 = (datetime.now() - timedelta(seconds=31536000))
+timestamp2 = (datetime.now() - timedelta(seconds=31536000   ) + timedelta(seconds=3600))
 
-timestamp1 = datetime.fromtimestamp(timestamp1)
-timestamp2 = datetime.fromtimestamp(timestamp2)
+original1 = timestamp1
+original2 = timestamp2
 
 all = []
 with open('../data/grupo_pelada_temp.csv','r') as csvinput:
@@ -32,25 +32,32 @@ with open('../data/grupo_pelada_temp.csv','r') as csvinput:
         row.append("fim")
         row.append("id_grupo_de_pelada")
         all.append(row)
-
+        dias = timedelta(seconds = 0)
         for row in reader:
             row.append("Campo do " + row[0])
             row.append(4.50)
-            row.append(timestamp1)
-            row.append(timestamp2)
+            string1 = datetime.fromtimestamp(datetime.timestamp(timestamp1))
+            string2 = datetime.fromtimestamp(datetime.timestamp(timestamp2))
+            row.append(string1)
+            row.append(string2)
             row.append(row[1])
             all.append(row)
 
         writer.writerows(all)
 
-with open('../data/pelada.csv','a') as fd: #Mexer nisso pra adicionar as linhas atuais *8
+dias = timedelta(seconds=86400)
+with open('../data/pelada.csv','a') as fd:
     for linha in all:
+        timestamp1 = original1
+        timestamp2 = original2
         fd.write(",".join(map(str, linha))+"\n")
-        for i in range(30):
-            fd.write(",".join(map(str, linha))+"\n")
-            fd.write(",".join(map(str, linha))+"\n")
-            fd.write(",".join(map(str, linha))+"\n")
-            fd.write(",".join(map(str, linha))+"\n")
+        for i in range(150):
+            timestamp1 = (timestamp1 + dias)
+            timestamp2 = (timestamp2 + dias)
+            string1 = datetime.fromtimestamp(datetime.timestamp(timestamp1))
+            string2 = datetime.fromtimestamp(datetime.timestamp(timestamp2))
+            linha[4] = string1
+            linha[5] = string2
             fd.write(",".join(map(str, linha))+"\n")
 
 os.remove("../data/grupo_pelada_temp.csv")
