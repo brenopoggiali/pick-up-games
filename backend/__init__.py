@@ -7,12 +7,6 @@ import pandas as pd
 
 from flask import (Flask, g, render_template, flash, redirect, url_for, abort, jsonify, request, session)
 
-from authlib.client import OAuth2Session
-import google.oauth2.credentials
-import googleapiclient.discovery
-
-from . import google_auth
-
 from flask_cors import CORS, cross_origin
 ###############################################################################################################
 #####################################          Finish imports.            #####################################
@@ -27,7 +21,6 @@ DEBUG = True
 application = app = Flask(__name__)
 app.secret_key = os.environ.get("FN_FLASK_SECRET_KEY", default=False)
 
-app.register_blueprint(google_auth.app)
 
 ###############################################################################################################
 ##########################          Initialize database when called                ############################
@@ -42,12 +35,7 @@ db.init_app(app)
 CORS(app)
 @app.route('/')
 def index():
-    if google_auth.is_logged_in():
-        user_info = google_auth.get_user_info()
-        return ('<div>You are currently logged in as ' + user_info['given_name'] + '<div><pre>' + \
-          json.dumps(user_info, indent=4) + "</pre> <a href=\'/google/logout\'>Logout here</a>")
-
-    return 'You are not currently logged in. <a href=\'/google/login\'>Login with google</a>'
+    return '<h1>Welcome to the backend! </h1>'
 
 @app.route('/peladas/<id_pelada>/jogadores/')
 def jogadores_pelada(id_pelada):
@@ -77,19 +65,57 @@ def jogador_peladas(id_pessoa):
   result = query.to_json(orient='records')
   return result
 
-@app.route('/vaquinhas_coletivas/')
-def get_vaquinhas():
+@app.route('/grupos/')
+def get_grupos(id_current_user = 38162):
+  # ATENÇÃO, PEGAR DO ID DEPOIS
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql("SELECT * FROM Vaquinha_Coletiva;", conn)
+  query = pd.read_sql("SELECT Grupo_de_pelada.nome, Grupo_de_pelada.descricao " +
+                       "FROM Pessoa NATURAL JOIN Participa_grupo_pelada NATURAL JOIN Grupo_de_pelada " +
+                       "WHERE Pessoa.id_pessoa = " + str(id_current_user) + ";", conn)
   result = query.to_json(orient='records')
   return result
 
-@app.route('/vaquinha_coletiva/<id_vaquinha_coletiva>/')
-def get_vaquinha(id_vaquinha_coletiva):
+@app.route('/grupo/<id_grupo_de_pelada>')
+def get_grupo(id_grupo_de_pelada):
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql("SELECT nome_pessoa, valor_pago " +
-                         "FROM Vaquinha_Coletiva_Pessoa NATURAL JOIN Pessoa " +
-                         "WHERE id_vaquinha_coletiva = " + str(id_vaquinha_coletiva) + " "
-                         "ORDER BY nome_pessoa;", conn)
+  query = pd.read_sql("SELECT lugar, preco, inicio, fim " +
+                       "FROM Grupo_de_pelada NATURAL JOIN Pelada " +
+                       "WHERE id_grupo_de_pelada = " + str(id_grupo_de_pelada) +
+                       " ORDER BY inicio;", conn)
   result = query.to_json(orient='records')
   return result
+
+@app.route('/dashboard/')
+def get_recent_peladas(id_current_user = 38162):
+  # ATENÇÃO, PEGAR DO ID DEPOIS
+  conn = sqlite3.connect('instance/backend.sqlite')
+  query = pd.read_sql("SELECT Grupo_de_Pelada.nome, lugar, inicio " +
+                         "FROM Jogador NATURAL JOIN Pelada NATURAL JOIN Grupo_de_Pelada " +
+                         "WHERE id_pelada in (SELECT id_pelada FROM Jogador NATURAL JOIN Pessoa WHERE id_pessoa = '" + str(id_current_user) + "') " +
+                         "GROUP BY id_pelada " +
+                         "ORDER BY inicio DESC;", conn)
+  result = query.to_json(orient='records')
+  return result
+
+
+#### AGUARDANDO AJUDA DA GABI ####
+
+# @app.route('/vaquinhas/')
+# def get_vaquinhas(id_current_user = 38162):
+#   # ATENÇÃO, PEGAR DO ID DEPOIS
+#   conn = sqlite3.connect('instance/backend.sqlite')
+#   query = pd.read_sql("FAZER DEPOIS;", conn)
+#   result = query.to_json(orient='records')
+#   return result
+
+# @app.route('/vaquinha/<id_vaquinha>')
+# def get_vaquinha(id_vaquinha):
+#   # ATENÇÃO, PEGAR DO ID DEPOIS
+#   id_vaquinha = 2
+#   conn = sqlite3.connect('instance/backend.sqlite')
+#   query = pd.read_sql("SELECT nome_pessoa, valor_pago " +
+#                        "FROM Vaquinha_Coletiva_Pessoa NATURAL JOIN Pessoa " +
+#                        "WHERE id_vaquinha_coletiva = " + str(id_vaquinha) + " "
+#                        "ORDER BY nome_pessoa;", conn)
+#   result = query.to_json(orient='records')
+#   return result
