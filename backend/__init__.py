@@ -97,16 +97,29 @@ def get_recent_peladas(id_current_user = 38162):
   result = query.to_json(orient='records')
   return result
 
+@app.route('/vaquinhas/')
+def get_vaquinhas(id_current_user = 4000000):
+  # ATENÇÃO, PEGAR DO ID DEPOIS
+  data_inicio = '2018-06-04 00:00:00'
+  conn = sqlite3.connect('instance/backend.sqlite')
+  query = pd.read_sql("SELECT id_vaquinha, 'Coletiva' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, valor_total as Valor " +
+                     "FROM Vaquinha NATURAL JOIN Vaquinha_Coletiva NATURAL JOIN Grupo_de_Pelada " +
+                     "WHERE id_grupo_de_pelada IN (SELECT id_grupo_de_pelada FROM Participa_grupo_pelada " +
+                                                  "WHERE id_pessoa = " + str(id_current_user) + ") " +
+                       "AND prazo >= '" + data_inicio + "' " +
+                       "AND id_vaquinha_coletiva = id_vaquinha " + " " +
+                     "UNION "+
+                       "SELECT id_vaquinha, 'Individual' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, valor as Valor " +
+                       "FROM Vaquinha NATURAL JOIN Vaquinha_Individual NATURAL JOIN Grupo_de_Pelada " +
+                       "WHERE id_grupo_de_pelada IN (SELECT id_grupo_de_pelada FROM Participa_grupo_pelada WHERE " +
+                                                   "id_pessoa = " + str(id_current_user) + ") AND " +
+                               "prazo >= '" + data_inicio + "' AND " +
+                               "id_vaquinha_individual = id_vaquinha " +
+                       "ORDER BY prazo;", conn)
+  result = query.to_json(orient='records')
+  return result
 
-#### AGUARDANDO AJUDA DA GABI ####
-
-# @app.route('/vaquinhas/')
-# def get_vaquinhas(id_current_user = 38162):
-#   # ATENÇÃO, PEGAR DO ID DEPOIS
-#   conn = sqlite3.connect('instance/backend.sqlite')
-#   query = pd.read_sql("FAZER DEPOIS;", conn)
-#   result = query.to_json(orient='records')
-#   return result
+# AGUARDANDO ALTERAÇÕES NO BANCO
 
 # @app.route('/vaquinha/<id_vaquinha>')
 # def get_vaquinha(id_vaquinha):
