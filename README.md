@@ -69,6 +69,6 @@ flask init-db
 ## Running
 
 ```
-chmod +x ./run.sh
-./run.sh
+chmod +x ./server.sh
+./server.sh
 ```
