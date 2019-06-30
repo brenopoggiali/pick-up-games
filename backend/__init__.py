@@ -78,10 +78,11 @@ def get_grupos(id_current_user = 38162):
 @app.route('/grupo/<id_grupo_de_pelada>')
 def get_grupo(id_grupo_de_pelada):
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql(f"SELECT lugar, preco, inicio, fim \
-                       FROM Grupo_de_pelada NATURAL JOIN Pelada \
-                       WHERE id_grupo_de_pelada =  {id_grupo_de_pelada} \
-                       ORDER BY inicio;", conn)
+  query = pd.read_sql(f"SELECT nome_pessoa, avg(Pontos) as Media_Pontos, avg(G) as Media_gols, avg(GC) as Media_gols_contra \
+                        FROM Grupo_de_Pelada NATURAL JOIN Pelada NATURAL JOIN Jogador NATURAL JOIN Pessoa \
+                        WHERE  id_grupo_de_pelada = {id_grupo_de_pelada} \
+                        GROUP BY id_pessoa \
+                        ORDER BY nome_pessoa;", conn)
   result = query.to_json(orient='records')
   return result
 
@@ -124,12 +125,12 @@ def get_vaquinhas(id_current_user = 38162):
 def get_vaquinha(id_vaquinha):
   conn = sqlite3.connect('instance/backend.sqlite')
   query = pd.read_sql(f"SELECT id_vaquinha, 'Coletiva' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, nome_pessoa, valor_pago as pergunta_ou_valor, valor_total as Valor \
-                      FROM Vaquinha JOIN Vaquinha_Coletiva ON id_vaquinha = id_vaquinha_coletiva NATURAL JOIN Vaquinha_Coletiva_Pessoa NATURAL JOIN Grupo_de_Pelada NATURAL JOIN Participa_grupo_pelada NATURAL JOIN Pessoa \
-                      WHERE id_vaquinha = {id_vaquinha} \
-                      UNION \
-                      SELECT id_vaquinha, 'Individual' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, nome_pessoa, pergunta_personalizada as pergunta_ou_valor, valor as Valor \
-                      FROM Vaquinha JOIN Vaquinha_Individual ON id_vaquinha = id_vaquinha_individual NATURAL JOIN Vaquinha_Individual_Pessoa NATURAL JOIN Grupo_de_Pelada JOIN Participa_grupo_Pelada ON Grupo_de_Pelada.id_grupo_de_pelada = Participa_grupo_Pelada.id_grupo_de_pelada NATURAL JOIN Pessoa \
-                      WHERE id_vaquinha = {id_vaquinha}\
-                      GROUP BY Nome, nome_pessoa;", conn)
+                        FROM Vaquinha JOIN Vaquinha_Coletiva ON id_vaquinha = id_vaquinha_coletiva NATURAL JOIN Vaquinha_Coletiva_Pessoa NATURAL JOIN Grupo_de_Pelada JOIN Participa_grupo_Pelada ON Grupo_de_Pelada.id_grupo_de_pelada = Participa_grupo_Pelada.id_grupo_de_pelada NATURAL JOIN Pessoa \
+                        WHERE id_vaquinha = {id_vaquinha} \
+                        UNION \
+                        SELECT id_vaquinha, 'Individual' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, nome_pessoa, pergunta_personalizada as pergunta_ou_valor, valor as Valor \
+                        FROM Vaquinha JOIN Vaquinha_Individual ON id_vaquinha = id_vaquinha_individual NATURAL JOIN Vaquinha_Individual_Pessoa NATURAL JOIN Grupo_de_Pelada JOIN Participa_grupo_Pelada ON Grupo_de_Pelada.id_grupo_de_pelada = Participa_grupo_Pelada.id_grupo_de_pelada NATURAL JOIN Pessoa \
+                        WHERE id_vaquinha = {id_vaquinha} \
+                        GROUP BY Nome, nome_pessoa;", conn)
   result = query.to_json(orient='records')
   return result
