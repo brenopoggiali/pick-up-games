@@ -40,28 +40,28 @@ def index():
 @app.route('/peladas/<id_pelada>/jogadores/')
 def jogadores_pelada(id_pelada):
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql("SELECT id_pessoa, nome_pessoa, Pontos, Nota, G, GC " +
-                       "FROM Jogador NATURAL JOIN Pessoa " +
-                       "WHERE Jogador.id_pelada = " + str(id_pelada) + " " +
-                       "ORDER BY nome_pessoa;", conn)
+  query = pd.read_sql(F"SELECT id_pessoa, nome_pessoa, Pontos, Nota, G, GC \
+                       FROM Jogador NATURAL JOIN Pessoa \
+                       WHERE Jogador.id_pelada = {id_pelada} \
+                       ORDER BY nome_pessoa;", conn)
   result = query.to_json(orient='records')
   return result
 
 @app.route('/admin_groups/<id_pessoa>/')
 def admin_groups(id_pessoa):
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql("SELECT Grupo_de_pelada.nome, Grupo_de_pelada.descricao " +
-                       "FROM Pessoa JOIN Grupo_de_Pelada ON Pessoa.id_pessoa = Grupo_de_Pelada.id_adm " + "WHERE Pessoa.id_pessoa = '" +
-                        id_pessoa + "';", conn)
+  query = pd.read_sql(f"SELECT Grupo_de_pelada.nome, Grupo_de_pelada.descricao \
+                       FROM Pessoa JOIN Grupo_de_Pelada ON Pessoa.id_pessoa = Grupo_de_Pelada.id_adm \
+                       WHERE Pessoa.id_pessoa = {id_pessoa};", conn)
   result = query.to_json(orient='records')
   return result
 
 @app.route('/jogador/<id_pessoa>/peladas/')
 def jogador_peladas(id_pessoa):
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql("SELECT Grupo_de_pelada.nome, Grupo_de_pelada.descricao " +
-                       "FROM Pessoa NATURAL JOIN Participa_grupo_pelada NATURAL JOIN Grupo_de_pelada " + "WHERE Pessoa.id_pessoa = '" + id_pessoa +
-                       "';", conn)
+  query = pd.read_sql(f"SELECT Grupo_de_pelada.nome, Grupo_de_pelada.descricao \
+                       FROM Pessoa NATURAL JOIN Participa_grupo_pelada NATURAL JOIN Grupo_de_pelada \
+                       WHERE Pessoa.id_pessoa = {id_pessoa};", conn)
   result = query.to_json(orient='records')
   return result
 
@@ -69,19 +69,19 @@ def jogador_peladas(id_pessoa):
 def get_grupos(id_current_user = 38162):
   # ATENÇÃO, PEGAR DO ID DEPOIS
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql("SELECT Grupo_de_pelada.nome, Grupo_de_pelada.descricao " +
-                       "FROM Pessoa NATURAL JOIN Participa_grupo_pelada NATURAL JOIN Grupo_de_pelada " +
-                       "WHERE Pessoa.id_pessoa = " + str(id_current_user) + ";", conn)
+  query = pd.read_sql(f"SELECT Grupo_de_pelada.nome, Grupo_de_pelada.descricao \
+                       FROM Pessoa NATURAL JOIN Participa_grupo_pelada NATURAL JOIN Grupo_de_pelada \
+                       WHERE Pessoa.id_pessoa = {id_current_user};", conn)
   result = query.to_json(orient='records')
   return result
 
 @app.route('/grupo/<id_grupo_de_pelada>')
 def get_grupo(id_grupo_de_pelada):
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql("SELECT lugar, preco, inicio, fim " +
-                       "FROM Grupo_de_pelada NATURAL JOIN Pelada " +
-                       "WHERE id_grupo_de_pelada = " + str(id_grupo_de_pelada) +
-                       " ORDER BY inicio;", conn)
+  query = pd.read_sql(f"SELECT lugar, preco, inicio, fim \
+                       FROM Grupo_de_pelada NATURAL JOIN Pelada \
+                       WHERE id_grupo_de_pelada =  {id_grupo_de_pelada} \
+                       ORDER BY inicio;", conn)
   result = query.to_json(orient='records')
   return result
 
@@ -89,46 +89,47 @@ def get_grupo(id_grupo_de_pelada):
 def get_recent_peladas(id_current_user = 38162):
   # ATENÇÃO, PEGAR DO ID DEPOIS
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql("SELECT Grupo_de_Pelada.nome, lugar, inicio " +
-                         "FROM Jogador NATURAL JOIN Pelada NATURAL JOIN Grupo_de_Pelada " +
-                         "WHERE id_pelada in (SELECT id_pelada FROM Jogador NATURAL JOIN Pessoa WHERE id_pessoa = '" + str(id_current_user) + "') " +
-                         "GROUP BY id_pelada " +
-                         "ORDER BY inicio DESC;", conn)
+  query = pd.read_sql(f"SELECT Grupo_de_Pelada.nome, lugar, inicio \
+                       FROM Jogador NATURAL JOIN Pelada NATURAL JOIN Grupo_de_Pelada \
+                       WHERE id_pelada in (SELECT id_pelada FROM Jogador NATURAL JOIN Pessoa WHERE id_pessoa = {id_current_user}) \
+                       GROUP BY id_pelada \
+                       ORDER BY inicio DESC\
+                       LIMIT 50;", conn)
   result = query.to_json(orient='records')
   return result
 
 @app.route('/vaquinhas/')
-def get_vaquinhas(id_current_user = 4000000):
+def get_vaquinhas(id_current_user = 38162):
   # ATENÇÃO, PEGAR DO ID DEPOIS
   data_inicio = '2018-06-04 00:00:00'
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql("SELECT id_vaquinha, 'Coletiva' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, valor_total as Valor " +
-                     "FROM Vaquinha NATURAL JOIN Vaquinha_Coletiva NATURAL JOIN Grupo_de_Pelada " +
-                     "WHERE id_grupo_de_pelada IN (SELECT id_grupo_de_pelada FROM Participa_grupo_pelada " +
-                                                  "WHERE id_pessoa = " + str(id_current_user) + ") " +
-                       "AND prazo >= '" + data_inicio + "' " +
-                       "AND id_vaquinha_coletiva = id_vaquinha " + " " +
-                     "UNION "+
-                       "SELECT id_vaquinha, 'Individual' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, valor as Valor " +
-                       "FROM Vaquinha NATURAL JOIN Vaquinha_Individual NATURAL JOIN Grupo_de_Pelada " +
-                       "WHERE id_grupo_de_pelada IN (SELECT id_grupo_de_pelada FROM Participa_grupo_pelada WHERE " +
-                                                   "id_pessoa = " + str(id_current_user) + ") AND " +
-                               "prazo >= '" + data_inicio + "' AND " +
-                               "id_vaquinha_individual = id_vaquinha " +
-                       "ORDER BY prazo;", conn)
+  query = pd.read_sql(f"SELECT id_vaquinha, 'Coletiva' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, valor_total as Valor \
+                      FROM Vaquinha NATURAL JOIN Vaquinha_Coletiva NATURAL JOIN Grupo_de_Pelada \
+                     WHERE id_grupo_de_pelada IN (SELECT id_grupo_de_pelada FROM Participa_grupo_pelada  \
+                                                  WHERE id_pessoa =   {id_current_user}  )  \
+                       AND prazo >= '  data_inicio  '  \
+                       AND id_vaquinha_coletiva = id_vaquinha     \
+                     UNION \
+                       SELECT id_vaquinha, 'Individual' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, valor as Valor  \
+                       FROM Vaquinha NATURAL JOIN Vaquinha_Individual NATURAL JOIN Grupo_de_Pelada  \
+                       WHERE id_grupo_de_pelada IN (SELECT id_grupo_de_pelada FROM Participa_grupo_pelada WHERE  \
+                                                   id_pessoa =   {id_current_user}  ) \
+                        AND prazo >= '{data_inicio}' \
+                        AND id_vaquinha_individual = id_vaquinha  \
+                       ORDER BY prazo;", conn)
   result = query.to_json(orient='records')
   return result
 
-# AGUARDANDO ALTERAÇÕES NO BANCO
-
-# @app.route('/vaquinha/<id_vaquinha>')
-# def get_vaquinha(id_vaquinha):
-#   # ATENÇÃO, PEGAR DO ID DEPOIS
-#   id_vaquinha = 2
-#   conn = sqlite3.connect('instance/backend.sqlite')
-#   query = pd.read_sql("SELECT nome_pessoa, valor_pago " +
-#                        "FROM Vaquinha_Coletiva_Pessoa NATURAL JOIN Pessoa " +
-#                        "WHERE id_vaquinha_coletiva = " + str(id_vaquinha) + " "
-#                        "ORDER BY nome_pessoa;", conn)
-#   result = query.to_json(orient='records')
-#   return result
+@app.route('/vaquinha/<id_vaquinha>')
+def get_vaquinha(id_vaquinha):
+  conn = sqlite3.connect('instance/backend.sqlite')
+  query = pd.read_sql(f"SELECT id_vaquinha, 'Coletiva' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, nome_pessoa, valor_pago as pergunta_ou_valor, valor_total as Valor \
+                      FROM Vaquinha JOIN Vaquinha_Coletiva ON id_vaquinha = id_vaquinha_coletiva NATURAL JOIN Vaquinha_Coletiva_Pessoa NATURAL JOIN Grupo_de_Pelada NATURAL JOIN Participa_grupo_pelada NATURAL JOIN Pessoa \
+                      WHERE id_vaquinha = {id_vaquinha} \
+                      UNION \
+                      SELECT id_vaquinha, 'Individual' as Tipo, motivo as Nome, Grupo_de_pelada.nome as Grupo , prazo, nome_pessoa, pergunta_personalizada as pergunta_ou_valor, valor as Valor \
+                      FROM Vaquinha JOIN Vaquinha_Individual ON id_vaquinha = id_vaquinha_individual NATURAL JOIN Vaquinha_Individual_Pessoa NATURAL JOIN Grupo_de_Pelada JOIN Participa_grupo_Pelada ON Grupo_de_Pelada.id_grupo_de_pelada = Participa_grupo_Pelada.id_grupo_de_pelada NATURAL JOIN Pessoa \
+                      WHERE id_vaquinha = {id_vaquinha}\
+                      GROUP BY Nome, nome_pessoa;", conn)
+  result = query.to_json(orient='records')
+  return result
