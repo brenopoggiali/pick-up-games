@@ -11,9 +11,14 @@ export class PickupStatsComponent implements OnInit {
   private pickup_id: string;
   private table: {};
   private sidetable: {};
+  private data: {};
   constructor(private router : ActivatedRoute) {
     this.pickup_id = this.router.snapshot.paramMap.get("pickup_id");
     console.log(this.pickup_id);
+    this.data = {
+      next: "next",
+      previous: "previous"
+    };
     this.table = {
       headerRow: [ 'Nome',  'Gols', 'Roubadas de Bola', 'Faltas cometidas' ],
       dataRows: [
