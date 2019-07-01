@@ -1,7 +1,7 @@
 import csv
 
-with open('jogadores_unicos (cópia).csv','r') as csvinput:
-    with open('jogadores_final.csv', 'w') as csvoutput:
+with open('../data/jogadores_final (cópia).csv','r') as csvinput:
+    with open('../data/jogadores_final.csv', 'w') as csvoutput:
         writer = csv.writer(csvoutput, lineterminator='\n')
         reader = csv.reader(csvinput)
 
@@ -11,7 +11,7 @@ with open('jogadores_unicos (cópia).csv','r') as csvinput:
         all.append(row)
 
         for row in reader:
-            row.append(row[1].replace(" ", "").lower()+"@pelada.com")
+            row.append(row[1].replace(" ", "").lower()+row[0]+"@pelada.com")
             all.append(row)
 
         writer.writerows(all)
