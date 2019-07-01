@@ -15,6 +15,7 @@ build/
 *.egg-info/
 
 .env
+env/
 bin/
 lib/
 pyvenv.cfg

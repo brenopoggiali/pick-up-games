@@ -12,14 +12,11 @@
           </a>
           <i *ngIf="data===undefined || data.previous==undefined" class="ti-arrow-circle-left"></i>
           14/05/2019
-          <a *ngIf="data!==undefined && data.next!==undefined" href="resumo/{{data.next}}" >
-              <i class="ti-arrow-circle-right"></i>
-          </a>
-          <i *ngIf="data===undefined || data.next===undefined" class="ti-arrow-circle-right"></i>
+          <i class="ti-thumb-up"></i>
         </h4>
       </small>
-      <div style="margin-left: 20px;" class="row">
-            <h5 >Meus números</h5>
+      <div class="row">
+            <h5 style="margin-left: 15px;">Meus números</h5>
             <div class="col-md-4">
                 Gols: {{goals}} <br>
                 Finalizações: {{finalizations}}<br>
@@ -37,6 +34,7 @@
     <div class="card card-plain">
         <div class="header sidetable_header">
             <h4 class="title">Top Scouts</h4>
+            <!-- <p class="category">Here is a subtitle for this table</p> -->
         </div>
         <div class="content table-responsive table-full-width">
             <table class="table table-hover sidetable">

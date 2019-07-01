@@ -14,6 +14,7 @@ import { PickupStatsComponent } from './pickup-stats/pickup-stats.component';
 import { ChipInComponent } from './chip-in/chip-in.component';
 import { GroupComponent } from './group/group.component';
 import { PickupGroupsComponent } from './pickup-groups/pickup-groups.component';
+<<<<<<< HEAD
 import { SmallCardItemComponent } from './small-card-item/small-card-item.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -21,6 +22,10 @@ import { ChipInDetailsComponent } from './chip-in-details/chip-in-details.compon
 import { StatsComponent } from './stats/stats.component';
 import { AuthGuard } from './auth-guards/auth.guards';
 import { ScoutJudgeComponent } from './scout-judge/scout-judge.component';
+=======
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+>>>>>>> c05a6b4722e9ededa5d55ce51651b36553042b12
 
 export const AppRoutes: Routes = [
     {
@@ -87,6 +92,7 @@ export const AppRoutes: Routes = [
         // canActivate: [AuthGuard]
     },
     {
+<<<<<<< HEAD
         path: 'smallcard',
         component: SmallCardItemComponent,
         // canActivate: [AuthGuard]
@@ -115,5 +121,13 @@ export const AppRoutes: Routes = [
         path: 'jogo/:pickup_id',
         component: ScoutJudgeComponent,
         // canActivate: [AuthGuard]
+=======
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
+>>>>>>> c05a6b4722e9ededa5d55ce51651b36553042b12
     }
 ]

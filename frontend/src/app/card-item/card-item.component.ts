@@ -12,7 +12,6 @@ export class CardItemComponent implements OnInit {
 
   @Input() row: Object;
   @Input() mixType: boolean;
-
   ngOnInit() {
     // this.row = {
     //   name: "Pelada dos Cria",

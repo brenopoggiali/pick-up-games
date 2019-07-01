@@ -1,86 +1,69 @@
 import pandas as pd
 import csv
 import os
+import time
 from datetime import datetime, timedelta
 
-#data = pd.read_csv("../data/dados_agregados_limpos.csv")
+grupos = pd.read_csv("../data/times_final.csv")
+#times = grupos["id_grupo_de_pelada"]
 
-with open('../data/dados_agregados_limpos.csv','r') as csvinput:
-    with open('../data/scouts.csv', 'w') as csvoutput:
+lista = ["nome", "id_grupo_de_pelada"]
+new_f = grupos[lista]
+new_f.to_csv("../data/grupo_pelada_temp.csv", index=False) #Output file
+
+# current date and time
+now = datetime.now()
+timestamp1 = (datetime.now() - timedelta(seconds=31536000))
+timestamp2 = (datetime.now() - timedelta(seconds=31536000   ) + timedelta(seconds=3600))
+
+original1 = timestamp1
+original2 = timestamp2
+
+all = []
+with open('../data/grupo_pelada_temp.csv','r') as csvinput:
+    with open('../data/pelada.csv', 'w') as csvoutput:
         writer = csv.writer(csvoutput, lineterminator='\n')
         reader = csv.reader(csvinput)
 
-        all = []
         row = next(reader)
-        row.append("id_pelada")
+        row.append("lugar")
+        row.append("preco")
+        row.append("inicio")
+        row.append("fim")
+        row.append("id_grupo_de_pelada")
         all.append(row)
-
+        dias = timedelta(seconds = 0)
         for row in reader:
-            toAppend = ''
-            if(row[5] == "Atlético-GO"):
-                toAppend = 336
-            elif(row[5] == "Atlético-MG"):
-                toAppend = 192
-            elif(row[5] == "Atlético-PR"):
-                toAppend = 248
-            elif(row[5] == "Avaí"):
-                toAppend = 272
-            elif(row[5] == "Bahia"):
-                toAppend = 142
-            elif(row[5] == "Botafogo"):
-                toAppend = 128
-            elif(row[5] == "Chapecoense"):
-                toAppend = 280
-            elif(row[5] == "Corinthians"):
-                toAppend = 136
-            elif(row[5] == "Coritiba"):
-                toAppend = 256
-            elif(row[5] == "Cruzeiro"):
-                toAppend = 200
-            elif(row[5] == "Figueirense"):
-                toAppend = 288
-            elif(row[5] == "Flamengo"):
-                toAppend = 120
-            elif(row[5] == "Fluminense"):
-                toAppend = 152
-            elif(row[5] == "Grêmio"):
-                toAppend = 208
-            elif(row[5] == "Internacional"):
-                toAppend = 216
-            elif(row[5] == "Palmeiras"):
-                toAppend = 168
-            elif(row[5] == "Ponte Preta"):
-                toAppend = 264
-            elif(row[5] == "Santa Cruz"):
-                toAppend = 312
-            elif(row[5] == "Santos"):
-                toAppend = 184
-            elif(row[5] == "São Paulo"):
-                toAppend = 176
-            elif(row[5] == "Sport"):
-                toAppend = 240
-            elif(row[5] == "Vasco"):
-                toAppend = 160
-            else:
-                toAppend = 224
-
-            if(row[30] == "2015"):
-                toAppend += 2
-            elif(row[30] == "2016"):
-                toAppend +=4
-            elif(row[30] == "2017"):
-                toAppend +=6
-
-            
-            toAppend = toAppend * 19
-            toAppend += int(row[27])
-
-            row.append(toAppend)
+            row.append("Campo do " + row[0])
+            row.append(4.50)
+            string1 = datetime.fromtimestamp(datetime.timestamp(timestamp1))
+            string2 = datetime.fromtimestamp(datetime.timestamp(timestamp2))
+            row.append(string1)
+            row.append(string2)
+            row.append(row[1])
             all.append(row)
 
         writer.writerows(all)
 
-f=pd.read_csv("../data/scouts.csv") #Imput file
-keep_col = ["A","AtletaID","CA","CV","DD","DP","FC","FD","FF","FS","FT","G","GC","GS","I","PE","PP","Pontos","RB","SG","id_pelada"] #kept columns
+dias = timedelta(seconds=86400)
+with open('../data/pelada.csv','a') as fd:
+    for linha in all:
+        timestamp1 = original1
+        timestamp2 = original2
+        fd.write(",".join(map(str, linha))+"\n")
+        for i in range(150):
+            timestamp1 = (timestamp1 + dias)
+            timestamp2 = (timestamp2 + dias)
+            string1 = datetime.fromtimestamp(datetime.timestamp(timestamp1))
+            string2 = datetime.fromtimestamp(datetime.timestamp(timestamp2))
+            linha[4] = string1
+            linha[5] = string2
+            fd.write(",".join(map(str, linha))+"\n")
+
+os.remove("../data/grupo_pelada_temp.csv")
+
+f=pd.read_csv("../data/pelada.csv") #Imput file
+keep_col = ["lugar", "preco", "inicio", "fim", "id_grupo_de_pelada"] #kept columns
 data = f[keep_col]
-data.to_csv("../data/scouts.csv", index=False)
+data.sort_values("id_grupo_de_pelada", inplace = True) 
+data.to_csv("../data/pelada.csv", index=False)

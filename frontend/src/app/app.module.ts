@@ -27,6 +27,7 @@ import { PickupStatsComponent } from './pickup-stats/pickup-stats.component';
 import { ChipInComponent } from './chip-in/chip-in.component';
 import { GroupComponent } from './group/group.component';
 import { PickupGroupsComponent } from './pickup-groups/pickup-groups.component';
+<<<<<<< HEAD
 import { SmallCardItemComponent } from './small-card-item/small-card-item.component';
 import {HttpClientModule} from '@angular/common/http' 
 import { LoginComponent } from './login/login.component';
@@ -53,6 +54,10 @@ export const firebaseConfig = {
   messagingSenderId: "708200264695",
   appId: "1:708200264695:web:c942f3ef839fb4d8"
 }
+=======
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+>>>>>>> c05a6b4722e9ededa5d55ce51651b36553042b12
 
 @NgModule({
   declarations: [
@@ -71,6 +76,7 @@ export const firebaseConfig = {
     ChipInComponent,
     GroupComponent,
     PickupGroupsComponent,
+<<<<<<< HEAD
     SmallCardItemComponent,
     LoginComponent,
     RegisterComponent,
@@ -78,6 +84,10 @@ export const firebaseConfig = {
     ChipInCardComponent,
     StatsComponent,
     ScoutJudgeComponent
+=======
+    LoginComponent,
+    RegisterComponent
+>>>>>>> c05a6b4722e9ededa5d55ce51651b36553042b12
   ],
   imports: [
     BrowserModule,

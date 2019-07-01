@@ -69,5 +69,6 @@ flask init-db
 ## Running
 
 ```
-flask run < ./backend/.env
+chmod +x ./server.sh
+./server.sh
 ```
