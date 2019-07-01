@@ -37,15 +37,35 @@ CORS(app)
 def index():
     return '<h1>Welcome to the backend! </h1>'
 
+@app.route('/login_or_register', methods=['GET', 'POST'])
+def login_or_register():
+  conn = sqlite3.connect('instance/backend.sqlite')
+  c = conn.cursor()
+
+  post = request.get_json()
+  nome_pessoa = post.get('name')
+  foto = post.get('image')
+  email = post.get('email')
+
+  query = pd.read_sql(f"SELECT * FROM Pessoa WHERE Pessoa.email = '{email}';", conn)
+  query_list = query.values.tolist()
+
+  if len(query_list):
+    return "User already exist"
+
+  c.execute(f"INSERT INTO Pessoa ('nome_pessoa', 'foto', 'email') VALUES ('{nome_pessoa}', '{foto}', '{email}')")
+  conn.commit()
+  return "Usuário cadastrado no banco!"
+
 @app.route('/peladas/<id_pelada>/jogadores/')
 def jogadores_pelada(id_pelada):
   conn = sqlite3.connect('instance/backend.sqlite')
-  query = pd.read_sql(F"SELECT id_pessoa, nome_pessoa, Pontos, Nota, G, GC \
+  query = pd.read_sql(f"SELECT id_pessoa, nome_pessoa, Pontos, Nota, G, GC \
                        FROM Jogador NATURAL JOIN Pessoa \
                        WHERE Jogador.id_pelada = {id_pelada} \
                        ORDER BY nome_pessoa;", conn)
   result = query.to_json(orient='records')
-  return result
+  return jsonify()
 
 @app.route('/admin_groups/<id_pessoa>/')
 def admin_groups(id_pessoa):
