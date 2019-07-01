@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../models/user';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 declare var $:any;
 
@@ -13,7 +15,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'newdashboard', title: 'Dashboard',  icon: 'ti-rocket', class: '' },
     { path: 'grupos', title: 'Grupos',  icon: 'ti-cup', class: '' },
     { path: 'vaquinhas', title: 'Vaquinhas',  icon: 'ti-money', class: '' },
-    { path: '', title: 'Meu Histórico',  icon: 'ti-stats-up', class: '' },
+    { path: 'historico', title: 'Meu Histórico',  icon: 'ti-stats-up', class: '' },
     // { path: 'dashboard', title: 'Dashboard',  icon: 'ti-panel', class: '' },
     // { path: 'user', title: 'User Profile',  icon:'ti-user', class: '' },
     // { path: 'table', title: 'Table List',  icon:'ti-view-list-alt', class: '' },
@@ -32,6 +34,15 @@ export const ROUTES: RouteInfo[] = [
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+    private user: User;
+    constructor(public afAuth: AngularFireAuth){
+        this.user = {
+            image: localStorage['image'],
+            name: localStorage['name'],
+            token: localStorage['token'],
+            uid: localStorage['uid']
+        };
+    }
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
@@ -40,6 +51,21 @@ export class SidebarComponent implements OnInit {
             return false;
         }
         return true;
+    }
+    logout(){
+        console.log("clicked");
+        localStorage['image'] = '';
+        localStorage['name'] = '';
+        localStorage['token'] = '';
+        localStorage['uid'] = '';
+        this.user.image = '';
+        this.user.name = '';
+        this.user.token = '';
+        this.user.uid = '';
+        this.afAuth.auth.signOut().then(function() {
+            localStorage.clear();
+            window.location.reload();
+        });
     }
 
 }

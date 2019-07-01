@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-chip-in',
@@ -11,40 +12,48 @@ export class ChipInComponent implements OnInit {
   private chipin: any[];
   private chipinAdm: any[];
   private group_id: string;
-  constructor(private router : ActivatedRoute) {
+  // private http: HttpClient;
+  constructor(private router : ActivatedRoute, private http: HttpClient) {
     this.group_id = this.router.snapshot.paramMap.get("group_id"); 
     console.log(this.group_id);
     this.chipin = [
       {
+        id: 321,
         name: "Pelada dos cria",
-        place: "Rua de baixo, numero 22",
+        description: "Rua de baixo, numero 22",
         date: "22/22",
-        time: "30:30"
+        value: "19,43"
       },
       {
+        id: 321,
         name: "Só marotos",
-        place: "Rua de baixo, numero 22",
+        description: "Rua de baixo, numero 22",
         date: "22/22",
-        time: "30:30"
+        value: "19,43"
       }
     ];
     this.chipinAdm = [
       {
+        id: 321,
         name: "Pelada dos cria",
-        place: "Rua de baixo, numero 22",
+        description: "Rua de baixo, numero 22",
         date: "22/22",
-        time: "30:30"
+        value: "19,43"
       },
       {
+        id: 321,
         name: "Só marotos",
-        place: "Rua de baixo, numero 22",
+        description: "Rua de baixo, numero 22",
         date: "22/22",
-        time: "30:30"
+        value: "19,43"
       }
     ];
   }
 
   ngOnInit() {
+    this.http.get('http://localhost:5000/vaquinhas_coletivas/', {responseType: "text"}).subscribe(data => {
+      console.log(data);
+    });
   }
 
 }

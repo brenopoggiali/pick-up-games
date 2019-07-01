@@ -7,7 +7,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PickupGroupsComponent implements OnInit {
 
-  constructor() { }
+  private rows: any[];
+  constructor() {
+    this.rows = [
+      {
+        id: 3392,
+        name: "Pelada dos cria",
+        place: "Rua de baixo, numero 22",
+        date: "22/22",
+        time: "30:30"
+      },
+      {
+        id: 3392,
+        name: "Só marotos",
+        place: "Rua de baixo, numero 22",
+        date: "22/22",
+        time: "30:30"
+      },
+      {
+        id: 3392,
+        name: "Só marotos",
+        place: "Rua de baixo, numero 22",
+        date: "22/22",
+        time: "30:30"
+      },
+      {
+        id: 3392,
+        name: "Só marotos",
+        place: "Rua de baixo, numero 22",
+        date: "22/22",
+        time: "30:30"
+      },
+      {
+        id: 3392,
+        name: "Só marotos",
+        place: "Rua de baixo, numero 22",
+        date: "22/22",
+        time: "30:30"
+      }
+    ];
+  }
 
   ngOnInit() {
   }

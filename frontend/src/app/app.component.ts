@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from './models/user'
 
 declare var $:any;
 
@@ -8,4 +9,6 @@ declare var $:any;
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent{}
+export class AppComponent{
+  private logged: boolean = localStorage['token']!== undefined && localStorage['token']!== null && localStorage['token']!== '';
+}

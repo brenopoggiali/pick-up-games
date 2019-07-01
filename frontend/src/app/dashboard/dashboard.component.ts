@@ -16,7 +16,8 @@ export class DashboardComponent implements OnInit{
           series: [
              [287, 385, 490, 562, 594, 626, 698, 895, 952],
             [67, 152, 193, 240, 387, 435, 535, 642, 744],
-            [23, 113, 67, 108, 190, 239, 307, 410, 410]
+            [23, 113, 67, 108, 190, 239, 307, 410, 410],
+            [10, 20, 30, 40, 50, 60, 70, 80, 90]
           ]
         };
 
@@ -97,8 +98,8 @@ export class DashboardComponent implements OnInit{
         new Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
 
         new Chartist.Pie('#chartPreferences', {
-          labels: ['62%','32%','6%'],
-          series: [62, 32, 6]
+          labels: ['62%','32%','6%', '9', '12'],
+          series: [50, 25, 6, 7, 12]
         });
     }
 }
