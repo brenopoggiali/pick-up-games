@@ -38,9 +38,14 @@ def index():
     return '<h1>Welcome to the backend! </h1>'
 
 @app.route('/login_or_register', methods=['GET', 'POST'])
-def login_or_register(nome_pessoa, foto, email):
+def login_or_register():
   conn = sqlite3.connect('instance/backend.sqlite')
   c = conn.cursor()
+
+  post = request.get_json()
+  nome_pessoa = post.get('name')
+  foto = post.get('image')
+  email = post.get('email')
 
   query = pd.read_sql(f"SELECT * FROM Pessoa WHERE Pessoa.email = '{email}';", conn)
   query_list = query.values.tolist()
