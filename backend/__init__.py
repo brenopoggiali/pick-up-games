@@ -66,7 +66,7 @@ def jogador_peladas(id_pessoa):
   return result
 
 @app.route('/grupos/')
-def get_grupos(id_current_user = 38162):
+def get_grupos(id_current_user = 37694):
   # ATENÇÃO, PEGAR DO ID DEPOIS
   conn = sqlite3.connect('instance/backend.sqlite')
   query = pd.read_sql(f"SELECT Grupo_de_pelada.nome, Grupo_de_pelada.descricao \
@@ -87,7 +87,7 @@ def get_grupo(id_grupo_de_pelada):
   return result
 
 @app.route('/dashboard/')
-def get_recent_peladas(id_current_user = 38162):
+def get_recent_peladas(id_current_user = 37694):
   # ATENÇÃO, PEGAR DO ID DEPOIS
   conn = sqlite3.connect('instance/backend.sqlite')
   query = pd.read_sql(f"SELECT Grupo_de_Pelada.nome, lugar, inicio \
@@ -100,7 +100,7 @@ def get_recent_peladas(id_current_user = 38162):
   return result
 
 @app.route('/vaquinhas/')
-def get_vaquinhas(id_current_user = 38162):
+def get_vaquinhas(id_current_user = 37694):
   # ATENÇÃO, PEGAR DO ID DEPOIS
   data_inicio = '2018-06-04 00:00:00'
   conn = sqlite3.connect('instance/backend.sqlite')
@@ -134,3 +134,111 @@ def get_vaquinha(id_vaquinha):
                         GROUP BY Nome, nome_pessoa;", conn)
   result = query.to_json(orient='records')
   return result
+
+@app.route('/historico/grafico1/<category>/<id_adversario>')
+def get_graph1(category, id_adversario, id_current_user = 37694):
+
+  conn = sqlite3.connect('instance/backend.sqlite')
+  query = pd.read_sql(f"SELECT id_pessoa, strftime('%m/%Y', inicio) as Mes, avg({category}) \
+                        FROM Jogador NATURAL JOIN Pessoa NATURAL JOIN Pelada \
+                        WHERE  id_pessoa = {id_current_user} OR id_pessoa= {id_adversario}\
+                        GROUP BY id_pessoa, strftime('%m/%Y', inicio) \
+                        ORDER BY strftime('%Y', inicio), strftime('%m', inicio);", conn)
+  labels, series = [], []
+  current_user, adversario = [], []
+  query_list = query.values.tolist()
+
+  for i in query_list:
+    labels.append(i[1])
+
+  labels = list(sorted(set(labels)))
+
+  for month in labels:
+    adversario_in_month = 0
+    for i in query_list:
+      if i[0] == int(id_adversario) and i[1]==month:
+        adversario.append(i[2])
+        adversario_in_month += 1
+
+    if adversario_in_month == 0:
+      adversario.append(0)
+
+    current_user_in_month = 0
+    for i in query_list:
+      if i[0] == id_current_user and i[1]==month:
+        current_user.append(i[2])
+        current_user_in_month += 1
+
+    if current_user_in_month == 0:
+      current_user.append(0)
+
+
+  return jsonify(labels=labels, series=[current_user, adversario])
+
+@app.route('/historico/grafico2/<id_grupo_de_pelada>/<category>')
+def get_graph2(category, id_grupo_de_pelada, id_current_user = 37694):
+
+  conn = sqlite3.connect('instance/backend.sqlite')
+  query = pd.read_sql(f"SELECT id_pessoa, nome_pessoa, sum({category}), \
+                        (SELECT sum({category}) FROM Pelada NATURAL JOIN Jogador WHERE id_grupo_de_pelada = {id_grupo_de_pelada}) as Total, \
+                        (100.0*sum({category})/(SELECT sum({category}) FROM Pelada NATURAL JOIN Jogador WHERE id_grupo_de_pelada = {id_grupo_de_pelada}) ) as Porcentagem \
+                        FROM Jogador NATURAL JOIN Pessoa NATURAL JOIN Pelada \
+                        WHERE  id_grupo_de_pelada = {id_grupo_de_pelada} \
+                        GROUP BY id_pessoa;", conn)
+  query_list = query.values.tolist()
+  labels, series, names = [], [], []
+
+  for i in query_list:
+    if i[0] == id_current_user:
+      labels.append(i[4])
+      series.append(i[2])
+      names.append(i[1])
+      query_list.remove(i)
+
+  for i in query_list:
+    labels.append(i[4])
+    series.append(i[2])
+    names.append(i[1])
+
+  return jsonify(labels=labels, series=series, names=names)
+
+@app.route('/historico/grafico3/<id_pessoa>/<category>/<id_grupo1>/<id_grupo2>')
+def get_graph3(id_pessoa, category, id_grupo1, id_grupo2):
+  id_pessoa = 38138
+  id_grupo1 = 282
+  id_grupo2 = 264
+  conn = sqlite3.connect('instance/backend.sqlite')
+  query = pd.read_sql(f"SELECT nome_pessoa, Nome, AVG({category}) \
+                        FROM Pessoa NATURAL JOIN Participa_grupo_pelada NATURAL JOIN Grupo_de_Pelada \
+                        NATURAL JOIN Pelada NATURAL JOIN Jogador \
+                        WHERE id_pessoa = {id_pessoa} AND (id_grupo_de_pelada = {id_grupo1} OR id_grupo_de_pelada = {id_grupo2}) \
+                        GROUP BY id_grupo_de_pelada;", conn)
+  query_list = query.values.tolist()
+  labels, series = [], []
+
+  for i in query_list:
+    labels.append(i[1])
+    series.append(i[2])
+
+  return jsonify(labels=labels, series=series)
+
+@app.route('/historico/grafico4/<id_grupo_de_pelada>/<id_pessoa1>/<id_pessoa2>')
+def get_graph4(id_grupo_de_pelada, id_pessoa1, id_pessoa2):
+  id_pessoa1 = 52950
+  id_pessoa2 = 63219
+  id_grupo1 = 282
+  conn = sqlite3.connect('instance/backend.sqlite')
+  query = pd.read_sql(f"SELECT nome_pessoa, Nome, AVG(Pontos), SUM(G), SUM(A), AVG(RB), AVG(FF), AVG(FD), AVG(DD), SUM(CA) \
+                        FROM Pessoa NATURAL JOIN Participa_grupo_pelada NATURAL JOIN Grupo_de_Pelada \
+                        NATURAL JOIN Pelada NATURAL JOIN Jogador \
+                        WHERE id_grupo_de_pelada = {id_grupo_de_pelada} AND (id_pessoa = {id_pessoa1} OR id_pessoa = {id_pessoa2}) \
+                        GROUP BY nome_pessoa;", conn)
+  labels = ["Média de pontos", "Gols", "Assistências", "Média de roubadas de bola", "Finalizações para fora", "Finalizações defendidas", "Defesas difíceis"]
+  query_list = query.values.tolist()
+  series, names = [], []
+
+  for i in query_list:
+    names.append(i[0])
+    series.append([i[2], i[3], i[4], i[5], i[6], i[7], i[8], i[9]])
+
+  return jsonify(labels=labels, series=series, names=names)
