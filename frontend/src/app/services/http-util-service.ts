@@ -1,13 +1,15 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Response, Headers, RequestOptions } from '@angular/http';
+import { HttpHeaders } from '@angular/common/http';
+// import { Response, Headers, RequestOptions } from '@angular/http';
+import { Response, RequestOptions } from '@angular/http';
 
 @Injectable()
 export class HttpUtilService {
 
-    constructor(private router: Router) { }
+    constructor() { }
 
-    private API_URL: string = 'http://localhost:5000/';
+    private API_URL: string = 'http://200.238.253.12:5000/';
 
 
     url(path: string) {
@@ -15,10 +17,13 @@ export class HttpUtilService {
     }
 
     headers() {
-        let headersParams = new Headers({ 'Content-Type': 'application/json' });
+        let headersParams = new HttpHeaders({ 'Content-Type': 'application/json' });
+        // let headersParams = new Headers({ 'Content-Type': 'application/json' });
 
-        let options = new RequestOptions({ headers: headersParams });
-        return options;
+        // let options = new RequestOptions({ headers: headersParams });
+        return {headers: headersParams};
+        // return { ['Content-Type': 'application/json' ]};
+        // return 
     }
 
     extrairDados(response: Response) {

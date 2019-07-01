@@ -31,11 +31,12 @@ export class LoginComponent implements OnInit {
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
             var currentUser = firebase.auth().currentUser
-            console.log(currentUser)
+            console.log(currentUser);
             localStorage['token'] = currentUser.refreshToken;
             localStorage['image'] = currentUser.photoURL;
             localStorage['name'] = currentUser.displayName;
             localStorage['uid'] = currentUser.uid;
+            localStorage['email'] = currentUser.email;
 
             var data = {
               token: currentUser.refreshToken,
@@ -47,9 +48,8 @@ export class LoginComponent implements OnInit {
 
             this.http.post(this.http_util.url('login_or_register'), data, this.http_util.headers()).subscribe(data => {
               console.log(data);
+              this.router.navigate(['']);
             });
-
-            this.router.navigate(['']);
             window.location.reload();
             return false;
             }.bind(this),

@@ -9,7 +9,7 @@
           <div class="content">
             <form>
                 <div class="row">
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                         <div class="form-group">
                             <label>De</label>
                             <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
@@ -20,31 +20,31 @@
                             <label>Até</label>
                             <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Categoria</label>
-                            <select type="select" class="form-control border-input">
+                            <select (change)="selectGroup1('categoria',$event.target.value)" type="select" class="form-control border-input">
                                 <option value="">Nenhum</option>
-                                <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Grupo</label>
-                            <select type="select" class="form-control border-input">
+                            <select (change)="selectGroup1('grupo',$event.target.value)" type="select" class="form-control border-input">
                                 <option value="">Nenhum</option>
-                                <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                <option *ngFor="let group of groups" value="{{group.id_grupo_de_pelada}}">{{group.nome}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Adversário</label>
-                            <select type="select" class="form-control border-input">
+                            <select (change)="selectGroup1('adversario',$event.target.value)" type="select" class="form-control border-input">
                                 <option value="">Nenhum</option>
-                                <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                <option *ngFor="let adversario of adversarios1" value="{{adversario.id_pessoa}}">{{adversario.nome_pessoa}}</option>
                             </select>
                         </div>
                     </div>
@@ -55,13 +55,12 @@
               <div id="chartHours" class="ct-chart"></div>
               <div class="footer">
                 <div class="chart-legend">
-                    <i class="fa fa-circle text-info"></i> Open
-                    <i class="fa fa-circle text-danger"></i> Click
-                    <i class="fa fa-circle text-warning"></i> Click Second Time
+                    <i class="fa fa-circle text-info"></i> Eu
+                    <i class="fa fa-circle text-warning"></i> Adversário
                 </div>
                 <hr>
                 <div class="col-xs-3 text-left">
-                    <button style="margin: 8px;" class="btn btn-sm btn-success btn-icon"><i class="fa ti-control-play"></i></button>
+                    <button (click)="graph1()" style="margin: 8px;" class="btn btn-sm btn-success btn-icon"><i class="fa ti-control-play"></i></button>
                 </div>
               </div>
             </div>
@@ -69,7 +68,7 @@
       </div>
     </div>
     <div class="row">
-        <div style="padding-left: 0px;" class="col-lg-5 col-md-5">
+        <!-- <div style="padding-left: 0px;" class="col-lg-5 col-md-5">
             <div class="card">
                 <div class="header">
                     <h4 class="title">Gráfico 2</h4>
@@ -93,18 +92,18 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Categoria</label>
-                                    <select type="select" class="form-control border-input">
+                                    <select (change)="selectGroup2('categoria',$event.target.value)" type="select" class="form-control border-input">
                                         <option value="">Nenhum</option>
-                                        <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                        <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Grupo</label>
-                                    <select type="select" class="form-control border-input">
+                                    <select (change)="selectGroup2('grupo',$event.target.value)" type="select" class="form-control border-input">
                                         <option value="">Nenhum</option>
-                                        <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                        <option *ngFor="let group of groups" value="{{group.id_grupo_de_pelada}}">{{group.nome}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -120,22 +119,22 @@
                         </div>
                         <hr>
                         <div class="stats">
-                                <button style="margin: 8px;" class="btn btn-sm btn-success btn-icon"><i class="fa ti-control-play"></i></button>
+                            <button (click)="graph2()" style="margin: 8px;" class="btn btn-sm btn-success btn-icon"><i class="fa ti-control-play"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div style="padding-left:0; padding-right:0;" class="col-lg-7 col-md-7">
             <div class="card ">
                 <div class="header">
-                    <h4 class="title">Gráfico 3</h4>
+                    <h4 class="title">Gráfico 2</h4>
                     <p class="category">Desempenho de um mesmo jogador em dois grupos diferentes</p>
                 </div>
                 <div class="content">
                         <form>
                             <div class="row">
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <div class="form-group">
                                         <label>De</label>
                                         <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
@@ -146,31 +145,31 @@
                                         <label>Até</label>
                                         <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Categoria</label>
-                                        <select type="select" class="form-control border-input">
+                                        <select (change)="selectGroup3('categoria',$event.target.value)" type="select" class="form-control border-input">
                                             <option value="">Nenhum</option>
-                                            <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                            <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Grupo 1</label>
-                                        <select type="select" class="form-control border-input">
+                                        <select (change)="selectGroup3('grupo1',$event.target.value)" type="select" class="form-control border-input">
                                             <option value="">Nenhum</option>
-                                            <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                            <option *ngFor="let group of groups" value="{{group.id}}">{{group.nome}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Grupo 2</label>
-                                        <select type="select" class="form-control border-input">
+                                        <select (change)="selectGroup3('grupo2', $event.target.value)" type="select" class="form-control border-input">
                                             <option value="">Nenhum</option>
-                                            <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                            <option *ngFor="let group of groups" value="{{group.id_grupo_de_pelada}}">{{group.nome}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -185,14 +184,14 @@
                         </div>
                         <hr>
                         <div class="stats">
-                            <button style="margin: 8px;" class="btn btn-sm btn-success btn-icon"><i class="fa ti-control-play"></i></button>
+                            <button (click)="grap" style="margin: 8px;" class="btn btn-sm btn-success btn-icon"><i class="fa ti-control-play"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-12">
             <div class="card row">
                 <div class="header">
@@ -217,18 +216,18 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Grupo</label>
-                                <select type="select" class="form-control border-input">
+                                <select (change)="selectGroup4('grupo',$event.target.value)" type="select" class="form-control border-input">
                                     <option value="">Nenhum</option>
-                                    <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                    <option *ngFor="let group of groups" value="{{group.id_grupo_de_pelada}}">{{group.nome}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Adversário</label>
-                                <select type="select" class="form-control border-input">
+                                <select (change)="selectGroup4('adversario',$event.target.value)" type="select" class="form-control border-input">
                                     <option value="">Nenhum</option>
-                                    <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                    <option *ngFor="let adversario of adversarios" value="{{adversario.id_pessoa}}">{{adversario.nome_pessoa}}</option>
                                 </select>
                             </div>
                         </div>
@@ -251,5 +250,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

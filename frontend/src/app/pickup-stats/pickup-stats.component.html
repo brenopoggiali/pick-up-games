@@ -1,34 +1,37 @@
 <div class="row">
     <div class="col-lg-8 col-md-7">
     <div class="card card-plain">
-    <h3 class="text-center group-name">{{pickup_id}}
+    <h3 class="text-center group-name">
+        <!-- {{pickup_id}} -->
+        {{my_numbers[7]}}
         <br/>
-        <button style="margin: 8px;" class="btn btn-sm btn-success btn-icon" (click)="logout()">Participar</button>
+        <!-- <button style="margin: 8px;" class="btn btn-sm btn-success btn-icon" (click)="logout()">Participar</button> -->
     </h3>
       <small>
         <h4 style="margin-top: 0px;" class="text-center"> 
-          <a *ngIf="data!==undefined && data.previous!==undefined" href="resumo/{{data.previous}}"> 
+          <!-- <a *ngIf="data!==undefined && data.previous!==undefined" (click)="previous()"> 
             <i class="ti-arrow-circle-left"></i>
-          </a>
-          <i *ngIf="data===undefined || data.previous==undefined" class="ti-arrow-circle-left"></i>
-          14/05/2019
-          <a *ngIf="data!==undefined && data.next!==undefined" href="resumo/{{data.next}}" >
+          </a> -->
+          <!-- <i *ngIf="data===undefined || data.previous==undefined" class="ti-arrow-circle-left"></i> -->
+          <!-- 14/05/2019 -->
+          {{my_numbers[8]}}
+          <!-- <a *ngIf="data!==undefined && data.next!==undefined" (click)="next()" >
               <i class="ti-arrow-circle-right"></i>
-          </a>
-          <i *ngIf="data===undefined || data.next===undefined" class="ti-arrow-circle-right"></i>
+          </a> -->
+          <!-- <i *ngIf="data===undefined || data.next===undefined" class="ti-arrow-circle-right"></i> -->
         </h4>
       </small>
       <div style="margin-left: 20px;" class="row">
             <h5 >Meus números</h5>
             <div class="col-md-4">
-                Gols: {{goals}} <br>
-                Finalizações: {{finalizations}}<br>
-                Faltas sofridas: {{goals}}<br>
+                Gols: {{my_numbers[0]}} <br>
+                Finalizações: {{my_numbers[1]}}<br>
+                Faltas sofridas: {{my_numbers[6]}}<br>
             </div>
             <div class="col-md-4">
-                Defesas: {{goals}}<br>
-                Roubadas de Bola: {{goals}}<br>
-                Faltas cometidas: {{goals}}<br>
+                Defesas: {{my_numbers[3]}}<br>
+                Roubadas de Bola: {{my_numbers[4]}}<br>
+                Faltas cometidas: {{my_numbers[5]}}<br>
             </div>
       </div>
     </div>

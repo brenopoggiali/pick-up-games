@@ -1,12 +1,12 @@
 <div class="row" *ngFor="let row of rows"> 
       <a href="resumo/{{row.id}}"><app-card-item [mixType]="true" [row]="row"></app-card-item></a>
       <h2>Meus números</h2>
-      <h6>Gols</h6>
-      <h6>Finalizações</h6>
-      <h6>Gols sofridos</h6>
-      <h6>Defesas</h6>
-      <h6>Roubadas de Bola</h6>
-      <h6>Faltas Cometidas</h6>
-      <h6>Faltas sofridas</h6>
+      <h6>Gols: {{row.gols}}</h6>
+      <h6>Finalizações: {{row.finalizacoes}}</h6>
+      <h6>Gols sofridos: {{row.gols_sofridos}}</h6>
+      <h6>Defesas: {{row.defesas}}</h6>
+      <h6>Roubadas de Bola: {{row.roubadas_de_bola}}</h6>
+      <h6>Faltas Cometidas: {{row.faltas_cometidas}}</h6>
+      <h6>Faltas sofridas: {{row.faltas_sofridas}}</h6>
 </div>
 

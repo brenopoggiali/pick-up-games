@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { HttpUtilService } from '../services/http-util-service';
 
 @Component({
   selector: 'app-pickup-stats',
@@ -10,17 +12,22 @@ export class PickupStatsComponent implements OnInit {
 
   private pickup_id: string;
   private table: {};
+  private my_numbers: any[];
   private sidetable: {};
   private data: {};
-  constructor(private router : ActivatedRoute) {
+  private dict_names: any[];
+  constructor(private router : ActivatedRoute,
+    private http_util: HttpUtilService, private  http: HttpClient) {
     this.pickup_id = this.router.snapshot.paramMap.get("pickup_id");
     console.log(this.pickup_id);
     this.data = {
       next: "next",
       previous: "previous"
     };
+
+
     this.table = {
-      headerRow: [ 'Nome',  'Gols', 'Roubadas de Bola', 'Faltas cometidas' ],
+      headerRow: [ 'Nome',  'Gols', 'Finalizações', 'Gols Sofridos', 'Defesas', 'Faltas Sofridas'],
       dataRows: [
           ['Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
           ['Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
@@ -42,6 +49,23 @@ export class PickupStatsComponent implements OnInit {
   }
 
   ngOnInit() {
+    var params = {
+      email: localStorage['email']
+    };
+
+    this.http.post(this.http_util.url('pelada/'+this.pickup_id), params, this.http_util.headers()).subscribe(data => {
+      console.log(data);
+      this.table['dataRows'] = data['players'];
+      this.my_numbers = data['scouts'][0];
+    });
+  }
+
+  previous(){
+
+  }
+  
+  next(){
+
   }
 
 }
