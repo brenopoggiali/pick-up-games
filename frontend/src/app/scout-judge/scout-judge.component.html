@@ -1,0 +1,145 @@
+<div class="row">
+  <div class="container col-md-6">
+      <div class="card"  style="height: 400px; overflow-y: scroll ">
+        <div class="header">
+            <h4 class="title">Jogadores</h4>
+        </div>
+        <div class="content">
+            <ul class="list-unstyled team-members">
+              <li *ngFor="let row of sidetable.dataRows">
+                  <div class="row">
+                      <div class="col-xs-1 text-right">
+                          <input style="padding-top: auto; padding-bottom:auto;" type="radio" name="radiogroup" value="{{row[0]}}">
+                      </div>
+                      <div class="col-xs-3">
+                          <div class="avatar">
+                              <img src="{{row[2]}}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                          </div>
+                        </div>
+
+                      <div style="padding-top: auto; padding-bottom:auto;" class="col-xs-6">
+                          {{row[1]}}
+                      </div>
+                  </div>
+              </li>
+          </ul>
+        </div>            
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-5">
+      <div class="content">
+        <div class="card card-plain">
+          <ul class="list-unstyled team-members">
+            <li>
+                <div class="row">
+                  <div class="col-xs-2 text-left" style="padding-right: 0px;">
+                      <button class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button>
+                  </div>
+                  <div class="col-xs-6" style="padding-left: 8px;">
+                      <h5 style="margin: 4px 15px 4px 0px !important;">
+                          Gol
+                      </h5>
+                  </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                  <div class="col-xs-2 text-left" style="padding-right: 0px;">
+                      <button class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button>
+                  </div>
+                  <div class="col-xs-6" style="padding-left: 8px;">
+                      <h5 style="margin: 4px 15px 4px 0px !important;">
+                          Gol sofrido
+                      </h5>
+                  </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                  <div class="col-xs-2 text-left" style="padding-right: 0px;">
+                      <button class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button>
+                  </div>
+                  <div class="col-xs-6" style="padding-left: 8px;">
+                      <h5 style="margin: 4px 15px 4px 0px !important;">
+                          Assitência
+                      </h5>
+                  </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                  <div class="col-xs-2 text-left" style="padding-right: 0px;">
+                      <button class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button>
+                  </div>
+                  <div class="col-xs-6" style="padding-left: 8px;">
+                      <h5 style="margin: 4px 15px 4px 0px !important;">
+                          Falta Sofrida
+                      </h5>
+                  </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                  <div class="col-xs-2 text-left" style="padding-right: 0px;">
+                      <button class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button>
+                  </div>
+                  <div class="col-xs-6" style="padding-left: 8px;">
+                      <h5 style="margin: 4px 15px 4px 0px !important;">
+                          Falta a favor
+                      </h5>
+                  </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                  <div class="col-xs-2 text-left" style="padding-right: 0px;">
+                      <button class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button>
+                  </div>
+                  <div class="col-xs-6" style="padding-left: 8px;">
+                      <h5 style="margin: 4px 15px 4px 0px !important;">
+                          Roubada de bola
+                      </h5>
+                  </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                  <div class="col-xs-2 text-left" style="padding-right: 0px;">
+                      <button class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button>
+                  </div>
+                  <div class="col-xs-6" style="padding-left: 8px;">
+                      <h5 style="margin: 4px 15px 4px 0px !important;">
+                          Defesa
+                      </h5>
+                  </div>
+                </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Números gerais</h4>
+            <!-- <p class="category">Here is a subtitle for this table</p> -->
+        </div>
+        <div class="content table-responsive table-full-width">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th *ngFor="let cell of table.headerRow">{{ cell }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of table.dataRows">
+                        <td *ngFor="let cell of row">{{cell}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>

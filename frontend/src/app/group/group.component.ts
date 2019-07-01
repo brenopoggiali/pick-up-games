@@ -15,12 +15,14 @@ export class GroupComponent implements OnInit {
     console.log(this.group_id);
     this.rows = [
       {
+        id: 12444,
         name: "Pelada dos cria",
         place: "Rua de baixo, numero 22",
         date: "22/22",
         time: "30:30"
       },
       {
+        id: 12,
         name: "Só marotos",
         place: "Rua de baixo, numero 22",
         date: "22/22",

@@ -15,13 +15,14 @@ import { ChipInComponent } from './chip-in/chip-in.component';
 import { GroupComponent } from './group/group.component';
 import { PickupGroupsComponent } from './pickup-groups/pickup-groups.component';
 import { SmallCardItemComponent } from './small-card-item/small-card-item.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ChipInDetailsComponent } from './chip-in-details/chip-in-details.component';
+import { StatsComponent } from './stats/stats.component';
+import { AuthGuard } from './auth-guards/auth.guards';
+import { ScoutJudgeComponent } from './scout-judge/scout-judge.component';
 
 export const AppRoutes: Routes = [
-    {
-        path: '',
-        redirectTo: 'newdashboard',
-        pathMatch: 'full',
-    },
     {
         path: 'dashboard',
         component: DashboardComponent
@@ -58,29 +59,61 @@ export const AppRoutes: Routes = [
     {
         path: 'newdashboard/:param',
         component: NewDashboardComponent
+
     },
     {
         path: 'newdashboard',
-        component: NewDashboardComponent
+        component: NewDashboardComponent,
+        // canActivate: [AuthGuard]
     },
     {
         path: 'resumo/:pickup_id',
-        component: PickupStatsComponent
+        component: PickupStatsComponent,
+        // canActivate: [AuthGuard]
     },
     {
         path: 'vaquinhas',
-        component: ChipInComponent
+        component: ChipInComponent,
+        // canActivate: [AuthGuard]
     },
     {
         path: 'grupos',
-        component: PickupGroupsComponent
+        component: PickupGroupsComponent,
+        // canActivate: [AuthGuard]
     },
     {
         path: 'grupo/:group_id',
-        component: GroupComponent
+        component: GroupComponent,
+        // canActivate: [AuthGuard]
     },
     {
         path: 'smallcard',
-        component: SmallCardItemComponent
+        component: SmallCardItemComponent,
+        // canActivate: [AuthGuard]
+    },
+    {
+        path: 'vaquinha/:chipin_id',
+        component: ChipInDetailsComponent,
+        // canActivate: [AuthGuard]
+    },
+    {
+        path: 'historico',
+        component: StatsComponent,
+        // canActivate: [AuthGuard]
+    },
+    {
+        path: '',
+        component: NewDashboardComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'login',
+        component: LoginComponent,
+        // canActivate: [AuthGuard]
+    },
+    {
+        path: 'jogo/:pickup_id',
+        component: ScoutJudgeComponent,
+        // canActivate: [AuthGuard]
     }
 ]

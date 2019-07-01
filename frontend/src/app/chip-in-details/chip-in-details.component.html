@@ -1,0 +1,65 @@
+<div style="padding: 0 15px 15px 15px;" class="row">
+  <div class="col-lg-9 col-md-11">
+      <div class="row">
+        <!-- imagem da vaquinha -->
+          <div class="img-header" style="background-image: url(assets/img/background.jpg)">
+            <h4 class="first-title">Chet Faker</h4>
+            <div class="author">
+              <!-- <h3>Chet Faker</h3> -->
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="container col-lg-3 col-md-6">
+    <div class="card card-plain">
+      <div class="row text-center">
+        <h4> 
+          <i class="ti-money"></i> {{row.price}}
+          <br>
+          <small>
+              <!-- {{row.question}} -->
+              sdfaskdjfasd sadklfasdjkakj
+          </small>
+        </h4>
+      </div>
+      <div class="row">
+        <div class="col-md-9 text-area-div">
+          <div class="form-group">
+              <textarea rows="3" class="form-control border-input" placeholder="Answer"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 text-area-div"> 
+          <div class="text-center">
+              <button type="submit" class="btn btn-info btn-fill btn-wd">Participar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+      <div class="header">
+          <h4 class="title">Promessas de Pagamento</h4>
+          <!-- <p class="category">Here is a subtitle for this table</p> -->
+      </div>
+      <div class="content table-responsive table-full-width">
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th *ngFor="let cell of table.headerRow">{{ cell }}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let row of table.dataRows">
+                      <td *ngFor="let cell of row">{{cell}}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</div>

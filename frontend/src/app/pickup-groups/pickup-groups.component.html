@@ -1,5 +1,7 @@
 <div class="container-fluid">
   <div class="row cardlist">
-    <a href="grupo/row.name"><app-card-item *ngFor="let row of rows" [row]="row"></app-card-item></a>
+    <span *ngFor="let row of rows">
+      <a href="grupo/{{row.id}}"><app-card-item [mixType]="false" [row]="row"></app-card-item></a>
+    </span>
   </div>
 </div>

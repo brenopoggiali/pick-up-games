@@ -9,7 +9,15 @@
         </a>
     </div>
     <ul class="nav">
-            <li *ngIf="isNotMobileMenu()">
+            <div style="margin-top: 55px;" class="card-user">
+                <div class="author">
+                    <img class="avatar border-white" src="{{user.image}}" alt="..."/>
+                    <h4 style="margin-top: 0;" class="title">{{user.name}}</h4>
+                    <button style="margin: 8px;" class="btn btn-sm btn-success btn-icon" (click)="logout()">Logout</button>
+                </div>
+                <hr>
+            </div>
+            <!-- <li *ngIf="isNotMobileMenu()">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="ti-panel"></i>
 					<p>Stats</p>
@@ -36,7 +44,7 @@
 					<p>Settings</p>
                 </a>
             </li>
-            <li class="divider" *ngIf="isNotMobileMenu()"></li>
+            <li class="divider" *ngIf="isNotMobileMenu()"></li> -->
         <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
             <a [routerLink]="[menuItem.path]">
                 <i class="{{menuItem.icon}}"></i>

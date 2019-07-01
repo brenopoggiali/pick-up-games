@@ -1,0 +1,255 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card row">
+          <div class="header">
+              <h4 class="title">Gráfico 1</h4>
+              <p class="category">Relatório ao longo do tempo do desempenho de um jogador em determinada categoria</p>
+          </div>
+          <div class="content">
+            <form>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>De</label>
+                            <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Até</label>
+                            <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select type="select" class="form-control border-input">
+                                <option value="">Nenhum</option>
+                                <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Grupo</label>
+                            <select type="select" class="form-control border-input">
+                                <option value="">Nenhum</option>
+                                <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Adversário</label>
+                            <select type="select" class="form-control border-input">
+                                <option value="">Nenhum</option>
+                                <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+          </div>
+          <div class="content">
+              <div id="chartHours" class="ct-chart"></div>
+              <div class="footer">
+                <div class="chart-legend">
+                    <i class="fa fa-circle text-info"></i> Open
+                    <i class="fa fa-circle text-danger"></i> Click
+                    <i class="fa fa-circle text-warning"></i> Click Second Time
+                </div>
+                <hr>
+                <div class="col-xs-3 text-left">
+                    <button style="margin: 8px;" class="btn btn-sm btn-success btn-icon"><i class="fa ti-control-play"></i></button>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div style="padding-left: 0px;" class="col-lg-5 col-md-5">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Gráfico 2</h4>
+                    <p class="category">Mostrar o percentual de scouts de acordo com o total do grupo e uma categoria selecionada</p>
+                </div>
+                <div class="content">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>De</label>
+                                    <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Até</label>
+                                    <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Categoria</label>
+                                    <select type="select" class="form-control border-input">
+                                        <option value="">Nenhum</option>
+                                        <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Grupo</label>
+                                    <select type="select" class="form-control border-input">
+                                        <option value="">Nenhum</option>
+                                        <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+
+                    <div class="footer">
+                        <div class="chart-legend">
+                            <i class="fa fa-circle text-info"></i> Open
+                            <i class="fa fa-circle text-danger"></i> Bounce
+                            <i class="fa fa-circle text-warning"></i> Unsubscribe
+                        </div>
+                        <hr>
+                        <div class="stats">
+                                <button style="margin: 8px;" class="btn btn-sm btn-success btn-icon"><i class="fa ti-control-play"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding-left:0; padding-right:0;" class="col-lg-7 col-md-7">
+            <div class="card ">
+                <div class="header">
+                    <h4 class="title">Gráfico 3</h4>
+                    <p class="category">Desempenho de um mesmo jogador em dois grupos diferentes</p>
+                </div>
+                <div class="content">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>De</label>
+                                        <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Até</label>
+                                        <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Categoria</label>
+                                        <select type="select" class="form-control border-input">
+                                            <option value="">Nenhum</option>
+                                            <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Grupo 1</label>
+                                        <select type="select" class="form-control border-input">
+                                            <option value="">Nenhum</option>
+                                            <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Grupo 2</label>
+                                        <select type="select" class="form-control border-input">
+                                            <option value="">Nenhum</option>
+                                            <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    <div id="chartActivity" class="ct-chart"></div>
+
+                    <div class="footer">
+                        <div class="chart-legend">
+                            <i class="fa fa-circle text-info"></i> Tesla Model S
+                            <i class="fa fa-circle text-warning"></i> BMW 5 Series
+                        </div>
+                        <hr>
+                        <div class="stats">
+                            <button style="margin: 8px;" class="btn btn-sm btn-success btn-icon"><i class="fa ti-control-play"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card row">
+                <div class="header">
+                    <h4 class="title">Gráfico 4</h4>
+                    <p class="category">Mostrar todas as categorias de um jogador em um grupo de pelada contra outro jogador selecionado</p>
+                </div>
+                <div class="content">
+                <form>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>De</label>
+                                <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Até</label>
+                                <input type="text" class="form-control border-input" placeholder="DD/MM/AA" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Grupo</label>
+                                <select type="select" class="form-control border-input">
+                                    <option value="">Nenhum</option>
+                                    <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Adversário</label>
+                                <select type="select" class="form-control border-input">
+                                    <option value="">Nenhum</option>
+                                    <option *ngFor="let adversario of adversarios" value="{{adversario.id}}">{{adversario.nome}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <div class="content">
+                    <div id="chartBar" class="ct-chart"></div>
+                    <div class="footer">
+                    <div class="chart-legend">
+                        <i class="fa fa-circle text-info"></i> Open
+                        <i class="fa fa-circle text-danger"></i> Click
+                        <i class="fa fa-circle text-warning"></i> Click Second Time
+                    </div>
+                    <hr>
+                    <div class="col-xs-3 text-left">
+                        <button style="margin: 8px;" class="btn btn-sm btn-success btn-icon"><i class="fa ti-control-play"></i></button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

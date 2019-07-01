@@ -1,9 +1,12 @@
 <div class="row" *ngFor="let row of rows"> 
-      <app-card-item [showImage]="true" [row]="row"></app-card-item>
+      <a href="resumo/{{row.id}}"><app-card-item [mixType]="true" [row]="row"></app-card-item></a>
       <h2>Meus números</h2>
       <h6>Gols</h6>
+      <h6>Finalizações</h6>
+      <h6>Gols sofridos</h6>
       <h6>Defesas</h6>
       <h6>Roubadas de Bola</h6>
-      <h6>Blablabla</h6>
+      <h6>Faltas Cometidas</h6>
+      <h6>Faltas sofridas</h6>
 </div>
 

@@ -1,4 +1,3 @@
-fazer um card especifico para a pelada dentro do grupo, tirar a foto do card
 <div class="container-fluid">
   <div class="row">
     <div class="img-header" style="background-image: url(assets/img/background.jpg)">
@@ -7,6 +6,8 @@ fazer um card especifico para a pelada dentro do grupo, tirar a foto do card
         </div>
     </div>
     <div class="row cardlist">
-        <app-small-card-item *ngFor="let row of rows" [row]="row"></app-small-card-item>
+      <div class="inline" *ngFor="let row of rows">
+        <a href="resumo/{{row.id}}"><app-small-card-item [row]="row"></app-small-card-item></a>
+      </div>
     </div>
 </div>

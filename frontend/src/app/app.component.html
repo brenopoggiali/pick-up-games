@@ -1,4 +1,6 @@
-<div class="wrapper">
+<app-login *ngIf='!logged'></app-login>
+
+<div *ngIf='logged' class="wrapper">
     <div class="sidebar" data-background-color="white" data-active-color="danger">
         <sidebar-cmp></sidebar-cmp>
     </div>

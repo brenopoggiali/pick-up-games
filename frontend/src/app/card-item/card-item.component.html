@@ -1,6 +1,6 @@
 <div class="col-lg-4 col-md-5">
   <div class="card card-user">
-      <div *ngIf="showImage" class="image">
+      <div class="image">
           <img src="assets/img/background.jpg" alt="..."/>
       </div>
       <div class="content card-content ">
@@ -14,14 +14,15 @@
                <!-- <a href="#"><small>@chetfaker</small></a> -->
             </h4>
           </div>
-          <p class="description text-center">
+          <p *ngIf="mixType" class="description text-center">
             <i class="ti-location-pin" style="margin-right: 4px"></i>
               <!-- Sport Mania - Rua da Paz, 555, Bairro da Glória, Belo Horizonte. -->
                {{row.place}}
           </p>
       </div>
-      <hr>
-      <div class="text-center card-footer">
+      <hr *ngIf="mixType">
+      <!-- <hr> -->
+      <div *ngIf="mixType" class="text-center card-footer">
           <div class="row">
               <div class="col-md-3 col-md-offset-1">
                     <h5 class="detail-item">
